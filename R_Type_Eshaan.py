@@ -1,3 +1,5 @@
+#only for logic implementation, code was compiled into one file.
+
 func3 = {"add": "000", "sub": "000", "slt": "010", "srl": "101", "or": "110", "and": "111"}
 opcode = {"add": "0110011", "sub": "0110011", "slt": "0110011", "srl": "0110011", "or": "0110011", "and": "0110011"}
 
@@ -33,3 +35,5 @@ def main():
             print(f"Error: {e}")
 
 main()
+
+
