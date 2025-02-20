@@ -1,5 +1,5 @@
 **Contrbutions :**
-R-Type - Eshaan Makkar \n
+R-Type and Understanding- Eshaan Makkar 
 S-type - Prarthna Sharma
 I-type and Error - Dewang Patel
 B-Type - Aryamaan Chaudhary
