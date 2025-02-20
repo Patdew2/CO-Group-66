@@ -11,11 +11,11 @@ registers = {"zero": "00000", "ra": "00001", "sp": "00010", "gp": "00011", "tp":
 
 def validate_r_type(parts):
     if len(parts) != 4:
-        raise ValueError("Syntax error: R-Type instructions require 3 operands")
+        raise ValueError("syntax error, r type needs 3 operands")
     if parts[1] not in registers or parts[2] not in registers or parts[3] not in registers:
-        raise ValueError("Invalid register in R-Type instruction")
+        raise ValueError("invalid register")
     if parts[0] not in func3:
-        raise ValueError("Unrecognized R-Type instruction")
+        raise ValueError("intstruction not recongnised")
 
 def convert_r_type(parts):
     validate_r_type(parts)
