@@ -1,26 +1,32 @@
-def int_to_bin(n, bits=12):
+def decimal_to_binary(n, num_bits=12):
     if n < 0:
-        n = (1 << bits) + n
-    return format(n & ((1 << bits) - 1), f'0{bits}b')
+        n = (1 << num_bits) + n
+    return format(n & ((1 << num_bits) - 1), f'0{num_bits}b')
 
-func3_s = {"sw": "010"}
-opcode_s = {"sw": "0100011"}
+s_type_func3 = {"sw": "010"}
+s_type_opcode = {"sw": "0100011"}
 
-registers = {"t1": "01001", "t2": "01010", "t3": "01011", "t4": "01100", "t5": "01101", "t6": "01110"}
+register_map = {"t1": "01001", "t2": "01010", "t3": "01011", "t4": "01100", "t5": "01101", "t6": "01110"}
 
-def convert_s_type(parts):
-    if len(parts) != 4 or parts[1] not in registers or parts[3] not in registers:
-        raise ValueError("Invalid S-Type instruction")
-    imm_val = int_to_bin(int(parts[2]), 12)
-    return f"{imm_val[:7]}{registers[parts[1]]}{registers[parts[3]]}{func3_s[parts[0]]}{imm_val[7:]}{opcode_s[parts[0]]}"
+def assemble_s_type_instruction(parts):
+    if len(parts) != 4 or parts[1] not in register_map or parts[3] not in register_map:
+        raise ValueError("Invalid S-Type instruction format")
 
-def main():
+    immediate_value = decimal_to_binary(int(parts[2]), 12)
+    func3 = s_type_func3[parts[0]]
+    opcode = s_type_opcode[parts[0]]
+
+    return f"{immediate_value[:7]}{register_map[parts[1]]}{register_map[parts[3]]}{func3}{immediate_value[7:]}{opcode}"
+
+def execute_instructions():
     instructions = ["sw t1, 8, t2", "sw t3, -4, t4", "sw t5, 12, t6"]
-    for inst in instructions:
-        parts = inst.replace(',', '').split()
+    
+    for instruction in instructions:
+        parts = instruction.replace(',', '').split()
         try:
-            print(convert_s_type(parts))
-        except ValueError as e:
-            print(f"Error: {e}")
+            machine_code = assemble_s_type_instruction(parts)
+            print(machine_code)
+        except ValueError as error:
+            print(f"Error: {error}")
 
-main()
+execute_instructions()
